@@ -12,8 +12,11 @@ import Dashboard from "../Pages/Dashboard/Dashboard"
 import NewsForm from "../Pages/NewsForm/NewsForm"
 import NewsLetterDetails from "../Pages/NewsletterDetails/NewsletterDetais"
 import NewsUpdate from "../Pages/NewsUpdate/NewsUpdateForm"
-import Subscribe from "../Pages/Subscribe/Subscribe"
+import SubscribePage from "../Pages/Subscribe/Subscribe"
 import { createBrowserRouter, Outlet, } from "react-router-dom";
+import { Logo } from '../Components/Logo/Logo';
+import NotFound from '../Pages/NotFound/NotFound';
+import NewsCategory from '../Pages/NewsCategory/NewsCategory';
 
 const Layout =()=>{
   return(
@@ -32,16 +35,24 @@ const router = createBrowserRouter([
     element:<Layout />,
     children:[
       {
-          path:"/",
-          element:<HomePage/>
+        path:"/",
+        element:<HomePage/>
+      },
+      {
+        path: "/",
+        element: <Logo/>
       },
       {
           path:"/newsletter",
           element:<Newsletter />
       },
       {
-          path:"/newsletterDetails",
+          path:"/newsletterDetails/:id",
           element:<NewsLetterDetails />
+      },
+      {
+        path:"/newsCategory/:categoryName",
+        element:<NewsCategory />
       },
       {
         path:"/contact",
@@ -57,7 +68,7 @@ const router = createBrowserRouter([
 },
 {
   path:"/subscribe",
-  element:<Subscribe />
+  element:<SubscribePage />
 },
 {
   path:"/blog",
@@ -68,20 +79,21 @@ const router = createBrowserRouter([
   element:<BlogDetails />
 },
 {
-  path:"/newsletterUpdate",
+  path:"/newsletterUpdate/:id",
   element:<NewsUpdate />
 },
 {
   path:"/newsForm",
   element:<NewsForm />
-},
-   
+},  
     ]
   },
   {
       path: "/dashboard",
       element: <Dashboard />,
-    },
- 
+    },{
+      path: "/*",
+      element : <NotFound/>
+    }
 ]);
 export default router

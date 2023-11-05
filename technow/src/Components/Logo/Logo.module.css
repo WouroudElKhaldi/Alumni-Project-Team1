@@ -5,21 +5,26 @@
     --color-red: #E32751;
 }
 
-.Logo{
-    font-family: 'Offside', sans-serif;
-    font-size: 2.5rem;
+.Container{
     display: flex;
     flex-direction: column;
-    margin-bottom: 0;
+}
+
+.Logo{
+    font-family: 'Offside', sans-serif;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
     padding:0;
 }
 
 .Span{
     font-family: 'Manrope' , sans-serif;
     color: var(--color-red);
-    font-size: 1.25rem;
-    margin-top: 0;
-    padding: 0 ;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0 5px;
 }
 
 .LogoGreen{
@@ -28,4 +33,8 @@
 
 .LogoWhite{
     color: white;
+}
+
+a{
+    text-decoration: none;
 }

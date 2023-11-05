@@ -2,8 +2,9 @@ import styles from './Subscribe.module.css'
 import { Button } from '../../Components/Buttons/Buttons'
 import img from '../../Assets/Images/Envelope-amico.png'
 import {useState , useEffect} from 'react'
+import axios from 'axios'
 
-export const Subscribe = () => {
+export const Subscribe = ({page}) => {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [width, setWidth] = useState(screenWidth < 1024 ? 'small' : 'big');
 
@@ -19,11 +20,53 @@ export const Subscribe = () => {
         };
     }, []);
 
-    const handleSubmit = (event) => {
+    const background = page === false ? styles.Gray : styles.White ;
+
+    const [email, setEmail] = useState('');
+    const [submitting, setSubmitting] = useState(false);
+    const [subscriptionSuccess, setSubscriptionSuccess] = useState(false);
+    const [subscriptionError, setSubscriptionError] = useState(false);
+
+
+    const handleFindNewsletterId = async () => {
+        try {
+        // Send a request to find the newsletter and get its ID
+        const response = await axios.get('http://localhost:5000/read/newsletter');
+        if (response.status === 200) {
+            const data = response.data 
+            const newsletter = data[0]
+            const newsletterId = newsletter._id;
+            return newsletterId;
+        }
+        } catch (error) {
+        console.log(error)
+        return null;
+        }
+    };
+
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
+
+        setSubmitting(true)
+        const newsletterId = await handleFindNewsletterId();
+
+        if(newsletterId){
+        try{
+            axios.patch('http://localhost:5000/add/newsletter/email' , {
+                id: newsletterId,
+                email: email,
+            })
+        } catch (error) {
+            console.log(error);
+        }finally{
+            setSubmitting(false)
+        }
     }
+};
+    
     return(
-        <div className={styles.Container}>
+        <div className={`${styles.Container} ${background}`}>
             <h1 className={styles.H1}> 
                 Subscribe to Mail Newsletter
             </h1>
@@ -40,7 +83,14 @@ export const Subscribe = () => {
                     <span>
                         <form action="" onSubmit={handleSubmit}>
                             <div className={styles.Input}>
-                                <input id ="email" type="email" name="email" className={styles.Email} placeholder='Email'/>
+                                <input 
+                                    id ="email" 
+                                    type="email" 
+                                    name="email" 
+                                    className={styles.Email} 
+                                    placeholder='Email'
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}/>
                                 <label className={styles.Label} htmlFor="email">Email</label>
                             </div>
                             <span className={styles.Button}>
