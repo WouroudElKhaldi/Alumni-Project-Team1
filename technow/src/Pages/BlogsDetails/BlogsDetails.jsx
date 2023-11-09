@@ -1,11 +1,10 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import BlogDetailsComponent from "../../Components/BlogDetails/BlogDetailsComponent";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ScrollButton } from "../../Components/ScrollButton/ScrollButton";
 import { Button } from "../../Components/Buttons/Buttons";
 import styles from "./BlogsDetails.module.css";
-import Toast from "../../Components/Toast/Toast";
 
 //Page
 const BlogDetails = () => {
@@ -92,7 +91,6 @@ const BlogDetails = () => {
 
   return (
     <div className={styles.container}>
-      <Toast />
       {isLoading ? (
         <div style={containerStyle}>
           <h1>Loading ...</h1>
@@ -117,13 +115,6 @@ const BlogDetails = () => {
           />
         </>
       )}
-      <Button
-        text="Update"
-        subscribed={false}
-        size={width}
-        color="green"
-        className={styles.button}
-      />
       <ScrollButton />
     </div>
   );

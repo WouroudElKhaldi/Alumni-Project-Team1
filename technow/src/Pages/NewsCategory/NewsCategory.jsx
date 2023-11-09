@@ -4,8 +4,7 @@ import NewsCard from "../../Components/NewsCard/News";
 import styles from "../../Pages/Newsletter/Newsletter.module.css";
 import axios from "axios";
 import { ScrollButton } from "../../Components/ScrollButton/ScrollButton";
-import { Link, useParams } from "react-router-dom";
-import Toast from "../../Components/Toast/Toast";
+import { useParams } from "react-router-dom";
 
 //Page
 const NewsCategory = () => {
@@ -73,7 +72,7 @@ const NewsCategory = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [categoryName]);
 
   const errorStyle = {
     display: "flex",
@@ -92,7 +91,6 @@ const NewsCategory = () => {
 
   return (
     <>
-      <Toast />
       <div className={styles.Container}>
         <h1 className={styles.H1}>Latest News</h1>
 

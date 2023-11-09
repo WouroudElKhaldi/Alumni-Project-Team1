@@ -19,18 +19,21 @@
 }
 
 .green{
-    color: var(--color-green);
-    border: solid 2px var(--color-green);
+    background-color: var(--color-green);
+    color: white; 
+    border: none;
 }
 
 .red{
-    color: var(--color-red);
-    border: solid 2px var(--color-red);
+    background-color: var(--color-red);
+    color: white;
+    border: none;
 }
 
 .red:hover{
-    background-color: var(--color-red);
-    color: white;
+    color: var(--color-red);
+    border: solid 2px var(--color-red);
+    background-color: white;
     box-shadow: 5px 5px 4px 0px var(--color-shadow);
 }
 
@@ -44,8 +47,9 @@
 }
 
 .Button.green:hover{
-    background-color: var(--color-green);
-    color: white; 
+    color: var(--color-green);
+    border: solid 2px var(--color-green);
+    background-color: white ;
     box-shadow: 5px 5px 4px 0px var(--color-shadow);
 }
 

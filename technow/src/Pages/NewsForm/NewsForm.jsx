@@ -55,7 +55,6 @@ const NewsForm = () => {
 
   const [success, setSuccess] = useState(false);
   const [failure, setFailure] = useState(false);
-  const { showGlobalToast } = useGlobalToast();
 
   const addNews = (e) => {
     e.preventDefault();
@@ -66,7 +65,6 @@ const NewsForm = () => {
         console.log("Request sent successfully", respone.data);
         if (respone.status === 200) {
           setSuccess(true);
-          showGlobalToast(formData.get("author"), formData.get("title"));
         } else {
           setSuccess(false);
           setFailure(true);
